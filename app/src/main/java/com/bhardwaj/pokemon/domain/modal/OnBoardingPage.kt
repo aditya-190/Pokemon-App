@@ -12,7 +12,7 @@ sealed class OnBoardingPage(
     object First : OnBoardingPage(
         image = R.drawable.icon_welcome,
         title = "Greetings",
-        description = "Are you a Boruto fan? Because if you are then we have a great news for you!"
+        description = "Are you a Pokemon fan? Because if you are then we have a great news for you!"
     )
 
     object Second : OnBoardingPage(
@@ -24,6 +24,6 @@ sealed class OnBoardingPage(
     object Third : OnBoardingPage(
         image = R.drawable.icon_power,
         title = "Power",
-        description = "Check out your hero's power and  see how much are they strong comparing to others."
+        description = "Check out your hero's power and see how much are they strong comparing to others."
     )
 }

@@ -17,9 +17,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.bhardwaj.pokemon.R
 import com.bhardwaj.pokemon.domain.modal.OnBoardingPage
+import com.bhardwaj.pokemon.navigation.Screen
 import com.bhardwaj.pokemon.ui.theme.*
 import com.google.accompanist.pager.*
 
@@ -32,7 +34,10 @@ private val pages = listOf(
 @ExperimentalAnimationApi
 @ExperimentalPagerApi
 @Composable
-fun WelcomeScreen(navController: NavHostController) {
+fun WelcomeScreen(
+    navController: NavHostController,
+    welcomeViewModel: WelcomeViewModel = hiltViewModel()
+) {
     val pagerState = rememberPagerState()
 
     Column(
@@ -64,7 +69,9 @@ fun WelcomeScreen(navController: NavHostController) {
             modifier = Modifier.weight(1F),
             pagerState = pagerState
         ) {
-
+            navController.popBackStack()
+            navController.navigate(Screen.Home.route)
+            welcomeViewModel.saveOnBoardingState(completed = true)
         }
     }
 }
