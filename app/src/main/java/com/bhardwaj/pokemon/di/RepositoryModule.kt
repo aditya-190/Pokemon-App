@@ -5,6 +5,7 @@ import com.bhardwaj.pokemon.data.repository.DataStoreOperationsImpl
 import com.bhardwaj.pokemon.data.repository.Repository
 import com.bhardwaj.pokemon.domain.repository.DataStoreOperations
 import com.bhardwaj.pokemon.domain.use_cases.UseCases
+import com.bhardwaj.pokemon.domain.use_cases.get_all_heroes.GetAllHeroesUseCase
 import com.bhardwaj.pokemon.domain.use_cases.read_on_boarding.ReadOnBoardingUseCase
 import com.bhardwaj.pokemon.domain.use_cases.save_on_boarding.SaveOnBoardingUseCase
 import dagger.Module
@@ -32,6 +33,7 @@ object RepositoryModule {
         return UseCases(
             saveOnBoardingUseCase = SaveOnBoardingUseCase(repository),
             readOnBoardingUseCase = ReadOnBoardingUseCase(repository),
+            getAllHeroesUseCase = GetAllHeroesUseCase(repository)
         )
     }
 }

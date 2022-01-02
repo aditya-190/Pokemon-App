@@ -1,6 +1,10 @@
 package com.bhardwaj.pokemon.di
 
+import androidx.paging.ExperimentalPagingApi
+import com.bhardwaj.pokemon.data.local.PokemonDatabase
 import com.bhardwaj.pokemon.data.remote.PokemonApi
+import com.bhardwaj.pokemon.data.repository.RemoteDataSourceImpl
+import com.bhardwaj.pokemon.domain.repository.RemoteDataSource
 import com.bhardwaj.pokemon.utils.Constants.BASE_URL
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
@@ -15,6 +19,7 @@ import retrofit2.Retrofit
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
+@ExperimentalPagingApi
 @ExperimentalSerializationApi
 @Module
 @InstallIn(SingletonComponent::class)
@@ -45,5 +50,17 @@ object NetworkModule {
     @Singleton
     fun providePokemonApi(retrofit: Retrofit): PokemonApi {
         return retrofit.create(PokemonApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRemoteDataSource(
+        pokemonApi: PokemonApi,
+        pokemonDatabase: PokemonDatabase
+    ): RemoteDataSource {
+        return RemoteDataSourceImpl(
+            pokemonApi = pokemonApi,
+            pokemonDatabase = pokemonDatabase
+        )
     }
 }

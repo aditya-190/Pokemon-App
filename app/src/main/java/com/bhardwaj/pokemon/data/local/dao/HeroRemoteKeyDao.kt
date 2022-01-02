@@ -9,8 +9,8 @@ import com.bhardwaj.pokemon.utils.Constants.HERO_REMOTE_KEY_DATABASE_TABLE
 
 @Dao
 interface HeroRemoteKeyDao {
-    @Query("SELECT * FROM $HERO_REMOTE_KEY_DATABASE_TABLE WHERE id=:id")
-    suspend fun getRemoteKey(id: Int): HeroRemoteKey?
+    @Query("SELECT * FROM $HERO_REMOTE_KEY_DATABASE_TABLE WHERE id=:heroId")
+    suspend fun getRemoteKey(heroId: Int): HeroRemoteKey?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addAllRemoteKeys(heroRemoteKeys: List<HeroRemoteKey>)
