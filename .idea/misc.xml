@@ -13,7 +13,11 @@
         <entry key="../../../../../layout/compose-model-1641139068172.xml" value="3.0" />
         <entry key="../../../../../layout/compose-model-1641141011416.xml" value="0.5" />
         <entry key="../../../../../layout/compose-model-1641141114671.xml" value="2.0" />
+        <entry key="../../../../../layout/compose-model-1641190784489.xml" value="0.55" />
+        <entry key="app/src/main/res/drawable-night/icon_placholder_image.xml" value="0.15925925925925927" />
         <entry key="app/src/main/res/drawable/icon_logo.xml" value="0.2" />
+        <entry key="app/src/main/res/drawable/icon_network_error.xml" value="0.15648148148148147" />
+        <entry key="app/src/main/res/drawable/icon_placholder_image.xml" value="0.15925925925925927" />
       </map>
     </option>
   </component>

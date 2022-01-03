@@ -9,7 +9,7 @@ import com.bhardwaj.pokemon.data.local.PokemonDatabase
 import com.bhardwaj.pokemon.data.remote.PokemonApi
 import com.bhardwaj.pokemon.domain.modal.Hero
 import com.bhardwaj.pokemon.domain.modal.HeroRemoteKey
-import com.bhardwaj.pokemon.utils.Constants.DEFAULT_PAGING_LIMIT
+import com.bhardwaj.pokemon.utils.Constants.HEROES_PER_PAGES
 import javax.inject.Inject
 
 @ExperimentalPagingApi
@@ -20,6 +20,18 @@ class HeroRemoteMediator @Inject constructor(
 
     private val heroDao = pokemonDatabase.heroDao()
     private val heroRemoteKeyDao = pokemonDatabase.heroRemoteKeyDao()
+
+    override suspend fun initialize(): InitializeAction {
+        val currentTime = System.currentTimeMillis()
+        val lastUpdated = heroRemoteKeyDao.getRemoteKey(heroId = 1)?.lastUpdated ?: 0L
+        val cacheTimeOut = 5
+        val differenceInMinutes = (currentTime - lastUpdated) / 1000 / 60
+        return if (differenceInMinutes.toInt() <= cacheTimeOut) {
+            InitializeAction.SKIP_INITIAL_REFRESH
+        } else {
+            InitializeAction.LAUNCH_INITIAL_REFRESH
+        }
+    }
 
     override suspend fun load(
         loadType: LoadType,
@@ -45,7 +57,7 @@ class HeroRemoteMediator @Inject constructor(
                 }
             }
 
-            val response = pokemonApi.getAllHeroes(page = page, limit = DEFAULT_PAGING_LIMIT)
+            val response = pokemonApi.getAllHeroes(page = page, limit = HEROES_PER_PAGES)
             if (response.heroes.isNotEmpty()) {
                 pokemonDatabase.withTransaction {
                     if (loadType == LoadType.REFRESH) {
@@ -59,7 +71,8 @@ class HeroRemoteMediator @Inject constructor(
                         HeroRemoteKey(
                             id = hero.id,
                             previousPage = previousPage,
-                            nextPage = nextPage
+                            nextPage = nextPage,
+                            lastUpdated = response.lastUpdated
                         )
                     }
                     heroRemoteKeyDao.addAllRemoteKeys(heroRemoteKeys = keys)

@@ -9,7 +9,7 @@ import com.bhardwaj.pokemon.data.paging_source.HeroRemoteMediator
 import com.bhardwaj.pokemon.data.remote.PokemonApi
 import com.bhardwaj.pokemon.domain.modal.Hero
 import com.bhardwaj.pokemon.domain.repository.RemoteDataSource
-import com.bhardwaj.pokemon.utils.Constants.DEFAULT_PAGING_LIMIT
+import com.bhardwaj.pokemon.utils.Constants.PAGES_PER_REQUEST
 import kotlinx.coroutines.flow.Flow
 
 @ExperimentalPagingApi
@@ -23,7 +23,7 @@ class RemoteDataSourceImpl(
     override fun getAllHeroes(): Flow<PagingData<Hero>> {
         val pagingSourceFactory = { heroDao.getAllHeroes() }
         return Pager(
-            config = PagingConfig(pageSize = DEFAULT_PAGING_LIMIT),
+            config = PagingConfig(pageSize = PAGES_PER_REQUEST),
             remoteMediator = HeroRemoteMediator(
                 pokemonApi = pokemonApi,
                 pokemonDatabase = pokemonDatabase

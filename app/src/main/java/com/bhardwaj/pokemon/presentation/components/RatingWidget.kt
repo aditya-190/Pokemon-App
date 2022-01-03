@@ -18,8 +18,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.bhardwaj.pokemon.R
+import com.bhardwaj.pokemon.ui.theme.EXTRA_SMALL_PADDING
 import com.bhardwaj.pokemon.ui.theme.LightGray
-import com.bhardwaj.pokemon.ui.theme.starColor
+import com.bhardwaj.pokemon.ui.theme.StarColor
 
 enum class StarType {
     FILLED,
@@ -31,8 +32,8 @@ enum class StarType {
 fun RatingWidget(
     modifier: Modifier,
     rating: Double,
-    scaleFactor: Float = 3F,
-    spaceBetween: Dp = MEDIUM_PADDING
+    scaleFactor: Float = 2F,
+    spaceBetween: Dp = EXTRA_SMALL_PADDING
 ) {
     val starPathString = stringResource(R.string.star_path)
     val starPath = remember { PathParser().parsePathString(pathData = starPathString).toPath() }
@@ -111,20 +112,20 @@ fun Star(
         val canvasSize = size
         scale(scale = scaleFactor) {
             translate(
-                left = (canvasSize.width) / 2F - (starPathBounds.width) / 1.7F,
-                top = (canvasSize.height) / 2F - (starPathBounds.height) / 1.7F
+                left = (canvasSize.width - starPathBounds.width) / 2F,
+                top = (canvasSize.height - starPathBounds.height) / 2F
             ) {
                 drawPath(
                     path = starPath,
-                    color = if (type == StarType.FILLED) starColor else LightGray.copy(0.5F),
+                    color = if (type == StarType.FILLED) StarColor else LightGray.copy(0.5F),
                 )
 
                 if (type == StarType.HALF) {
                     clipPath(path = starPath) {
                         drawRect(
-                            color = starColor,
+                            color = StarColor,
                             size = Size(
-                                width = starPathBounds.maxDimension / 1.7F,
+                                width = starPathBounds.maxDimension / 2F,
                                 height = starPathBounds.maxDimension * scaleFactor
                             )
                         )

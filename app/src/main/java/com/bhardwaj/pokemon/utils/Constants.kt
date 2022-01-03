@@ -2,6 +2,7 @@ package com.bhardwaj.pokemon.utils
 
 object Constants {
     const val BASE_URL = "https://pokemon-server-api.herokuapp.com"
+//    const val BASE_URL = "http://10.0.2.2:8080"
 
     const val ROUTE_SPLASH_SCREEN = "route_splash_screen"
     const val ROUTE_WELCOME_SCREEN = "route_welcome_screen"
@@ -18,5 +19,6 @@ object Constants {
     const val HERO_DATABASE_TABLE = "hero_table"
     const val HERO_REMOTE_KEY_DATABASE_TABLE = "hero_remote_key_table"
 
-    const val DEFAULT_PAGING_LIMIT = 3
+    const val HEROES_PER_PAGES = 6
+    const val PAGES_PER_REQUEST = 1
 }
