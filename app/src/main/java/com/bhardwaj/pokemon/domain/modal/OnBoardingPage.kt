@@ -22,7 +22,7 @@ sealed class OnBoardingPage(
     )
 
     object Third : OnBoardingPage(
-        image = R.drawable.icon_power,
+        image = R.drawable.icon_hand,
         title = "Power",
         description = "Check out your hero's power and see how much are they strong comparing to others."
     )

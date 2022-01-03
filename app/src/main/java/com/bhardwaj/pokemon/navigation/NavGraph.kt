@@ -1,6 +1,7 @@
 package com.bhardwaj.pokemon.navigation
 
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -8,6 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import coil.annotation.ExperimentalCoilApi
+import com.bhardwaj.pokemon.presentation.screens.details.DetailsScreen
 import com.bhardwaj.pokemon.presentation.screens.home.HomeScreen
 import com.bhardwaj.pokemon.presentation.screens.search.SearchScreen
 import com.bhardwaj.pokemon.presentation.screens.splash.SplashScreen
@@ -15,6 +17,7 @@ import com.bhardwaj.pokemon.presentation.screens.welcome.WelcomeScreen
 import com.bhardwaj.pokemon.utils.Constants.DETAILS_ARGUMENT_KEY
 import com.google.accompanist.pager.ExperimentalPagerApi
 
+@ExperimentalMaterialApi
 @ExperimentalCoilApi
 @ExperimentalAnimationApi
 @ExperimentalPagerApi
@@ -32,9 +35,7 @@ fun SetupNavGraph(navController: NavHostController) {
             arguments = listOf(navArgument(DETAILS_ARGUMENT_KEY) {
                 type = NavType.IntType
             })
-        ) {
-
-        }
+        ) { DetailsScreen(navController = navController) }
         composable(route = Screen.Search.route) { SearchScreen(navController = navController) }
     }
 }

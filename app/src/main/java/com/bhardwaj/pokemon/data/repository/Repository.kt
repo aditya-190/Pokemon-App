@@ -3,11 +3,13 @@ package com.bhardwaj.pokemon.data.repository
 import androidx.paging.PagingData
 import com.bhardwaj.pokemon.domain.modal.Hero
 import com.bhardwaj.pokemon.domain.repository.DataStoreOperations
+import com.bhardwaj.pokemon.domain.repository.LocalDataSource
 import com.bhardwaj.pokemon.domain.repository.RemoteDataSource
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class Repository @Inject constructor(
+    private val localDataSource: LocalDataSource,
     private val remote: RemoteDataSource,
     private val dataStore: DataStoreOperations
 ) {
@@ -18,6 +20,10 @@ class Repository @Inject constructor(
 
     fun searchHeroes(nameQuery: String): Flow<PagingData<Hero>> {
         return remote.searchHeroes(nameQuery = nameQuery)
+    }
+
+    suspend fun getSelectedHero(heroId: Int): Hero {
+        return localDataSource.getSelectedHero(heroId = heroId)
     }
 
     suspend fun saveOnBoardingState(completed: Boolean) {
