@@ -19,6 +19,9 @@ object Constants {
     const val HERO_DATABASE_TABLE = "hero_table"
     const val HERO_REMOTE_KEY_DATABASE_TABLE = "hero_remote_key_table"
 
-    const val HEROES_PER_PAGES = 6
-    const val PAGES_PER_REQUEST = 1
+    const val HEROES_PER_PAGES_GET_HEROES = 6
+    const val PAGES_PER_REQUEST_GET_HEROES = 1
+
+    const val HEROES_PER_PAGES_SEARCH_HEROES = 6
+    const val PAGES_PER_REQUEST_SEARCH_HEROES = 1
 }

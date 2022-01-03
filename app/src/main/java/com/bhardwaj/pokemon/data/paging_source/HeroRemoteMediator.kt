@@ -9,7 +9,7 @@ import com.bhardwaj.pokemon.data.local.PokemonDatabase
 import com.bhardwaj.pokemon.data.remote.PokemonApi
 import com.bhardwaj.pokemon.domain.modal.Hero
 import com.bhardwaj.pokemon.domain.modal.HeroRemoteKey
-import com.bhardwaj.pokemon.utils.Constants.HEROES_PER_PAGES
+import com.bhardwaj.pokemon.utils.Constants.HEROES_PER_PAGES_GET_HEROES
 import javax.inject.Inject
 
 @ExperimentalPagingApi
@@ -57,7 +57,7 @@ class HeroRemoteMediator @Inject constructor(
                 }
             }
 
-            val response = pokemonApi.getAllHeroes(page = page, limit = HEROES_PER_PAGES)
+            val response = pokemonApi.getAllHeroes(page = page, limit = HEROES_PER_PAGES_GET_HEROES)
             if (response.heroes.isNotEmpty()) {
                 pokemonDatabase.withTransaction {
                     if (loadType == LoadType.REFRESH) {
